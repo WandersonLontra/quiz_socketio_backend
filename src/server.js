@@ -5,10 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { questions, studentAnswer } from './database/db.js';
 
-
 const app = express();
 const server = http.createServer(app);
-
 
 export const io = new ioServer(server, {
     cors: {
@@ -46,6 +44,8 @@ io.on('connection', socket => {
 
         }
     });
+
+    socket.emit('answersToTeacher',studentAnswer);
 
     socket.on('studentAnswersData', answerData => {
         const data = {

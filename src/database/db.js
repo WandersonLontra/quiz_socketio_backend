@@ -24,15 +24,3 @@ export const questions = [
 ];
 
 export const studentAnswer = {};
-
-// export const studentAnswer = {
-//     wanderson: [
-//         {
-
-//         },
-//         {
-
-//         }
-//     ],
-//     Barbara
-// }
