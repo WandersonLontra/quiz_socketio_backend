@@ -22,6 +22,8 @@ io.on('connection', socket => {
 
     socket.emit('storageQuestions', questions);
 
+    socket.emit('questionsAmount', questions.length);
+
     socket.on('createQuestion', question => {
         if(question !== null){
             const keys = Object.keys(question);
@@ -40,10 +42,12 @@ io.on('connection', socket => {
             questions.push(newQuestion);
 
             socket.broadcast.emit('receivedQuestions',newQuestion);
+            socket.emit('questionsAmount', questions.length);
+
         }
     });
 
-    socket.on('sendAnswerData', answerData => {
+    socket.on('studentAnswersData', answerData => {
         const data = {
             id: answerData.id,
             question_about: answerData.question_about,
@@ -72,7 +76,7 @@ io.on('connection', socket => {
         } else {
             studentAnswer[answerData.student_name] = [data];
         }
-        socket.broadcast.emit('sendAnswersToTeacher',studentAnswer);
+        socket.broadcast.emit('answersToTeacher',studentAnswer);
     });
 
 });
