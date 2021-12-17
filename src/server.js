@@ -3,7 +3,7 @@ import http from 'http';
 import { Server as ioServer } from 'socket.io';
 import { v4 as uuidv4 } from 'uuid';
 
-import { questions } from './database/db.js';
+import { questions, studentAnswer } from './database/db.js';
 
 
 const app = express();
@@ -44,10 +44,37 @@ io.on('connection', socket => {
     });
 
     socket.on('sendAnswerData', answerData => {
-        console.log(answerData);
+        const data = {
+            id: answerData.id,
+            question_about: answerData.question_about,
+            isCorrectAnswer: answerData.isCorrectAnswer
+        }
 
-        
-    })
+        if(studentAnswer[answerData.student_name]){
+            let isAnswered = false;
+
+            const newData = [];
+
+            for( let answer of studentAnswer[answerData.student_name]){
+                if(answer.id === answerData.id) {
+                    isAnswered = true;
+                } else {
+                    newData.push(answer);
+                }
+            }
+
+            if(isAnswered){
+                newData.push(data);
+                studentAnswer[answerData.student_name] = newData;
+            } else {
+                studentAnswer[answerData.student_name].push(data);
+            }
+        } else {
+            studentAnswer[answerData.student_name] = [data];
+        }
+        socket.broadcast.emit('sendAnswersToTeacher',studentAnswer);
+    });
+
 });
 
 const port = process.env.PORT || 3333;
