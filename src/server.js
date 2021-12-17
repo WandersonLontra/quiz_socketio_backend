@@ -39,13 +39,15 @@ io.on('connection', socket => {
 
             questions.push(newQuestion);
 
-            // console.log('DEPOIS:',questions);
-
             socket.broadcast.emit('receivedQuestions',newQuestion);
         }
     });
 
-    socket.on('sendMessage',username => console.log(username));
+    socket.on('sendAnswerData', answerData => {
+        console.log(answerData);
+
+        
+    })
 });
 
 const port = process.env.PORT || 3333;
