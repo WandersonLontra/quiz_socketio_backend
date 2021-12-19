@@ -39,8 +39,7 @@ Url para conexão com o frontend, via socket.io. É imprescindível a configura�
 
 ## Iniciando a aplicação 😍
 
-Após a instalação das dependências e configuração da variável de ambiente
-Rode o comando: 
+Após a instalação das dependências e configuração da variável de ambiente, rode o comando: 
 
 
 ```bash
