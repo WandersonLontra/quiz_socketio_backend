@@ -31,7 +31,7 @@ npm install
 # ou
 yarn
 ```
-- *Crie, na raiz do projeto, um arquivo com nome **.env** para setar a variável de ambiente abaixo:*
+- *Crie, na raiz do projeto, um arquivo com nome **".env"** para setar a variável de ambiente abaixo:*
 > ORIGIN_CORS_URL = http://localhost:3000
 
 Url para conexão com o frontend, via socket.io. É imprescindível a configuração desta variável, caso contrário, a conexão não irá ocorrer devido as restrições do **CORS**.
